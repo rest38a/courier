@@ -1,3 +1,6 @@
+/**
+ * Аутентификация пользователя
+ */
 export function login ({ commit, getters }, user) {
   return new Promise((resolve, reject) => {
     if (user.login === 'demo' && user.password === 'demo') {
@@ -14,6 +17,10 @@ export function login ({ commit, getters }, user) {
   })
 }
 
+/**
+ *
+ * Выход пользователя из системы
+ */
 export function logout ({ commit }) {
   return new Promise((resolve, reject) => {
     commit('logout')
@@ -22,3 +29,17 @@ export function logout ({ commit }) {
   })
 }
 
+/**
+ * Отметка о нахождении на базе
+ */
+export function orderCancel ({ getters }, user) {
+  return new Promise((resolve, reject) => {
+    this.$axios.post(`${getters.getBaseUrl}/api/deliveryman/onbase/`, user.id)
+      .then(res => {
+        resolve(res.data.state)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}

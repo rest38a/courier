@@ -46,8 +46,8 @@
     <div class="row">
       <div class="col">
         <q-btn-group spread>
-          <q-btn size="md" color="red" push label="Отмена" @click="confirm = !confirm" />
-          <q-btn size="md" style="background: goldenrod; color: white" push label="Заказ доставлен" @click="confirm = !confirm" />
+          <q-btn size="md" color="red" push label="Отмена" @click="setCancelOrDelivery('cancel')" />
+          <q-btn size="md" style="background: goldenrod; color: white" push label="Заказ доставлен" @click="setCancelOrDelivery('delivery')" />
         </q-btn-group>
       </div>
     </div>
@@ -59,7 +59,12 @@
 
         <q-card-actions align="right">
           <q-btn flat label="Отмена" color="primary" v-close-popup />
-          <q-btn flat label="Продолжить" color="primary" v-close-popup />
+          <q-btn
+            flat
+            label="Продолжить"
+            color="primary"
+            v-close-popup
+            @click="onCancelOrDelivery" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -81,7 +86,8 @@ export default {
   data: () => ({
     confirm: false,
     dialog: false,
-    position: 'bottom'
+    position: 'bottom',
+    cancelOrDelivery: ''
   }),
   components: {
     Map
@@ -94,17 +100,39 @@ export default {
   },
   methods: {
     back () {
-      this.$router.push('/order')
+      this.$router.push({ name: 'order' })
     },
     openDialog () {
       this.dialog = true
     },
     updateDialog (status) {
       this.dialog = status
+    },
+    setCancelOrDelivery (value) {
+      this.cancelOrDelivery = value
+      this.confirm = !this.confirm
+    },
+    onCancelOrDelivery () {
+      if (this.cancelOrDelivery === 'delivery') {
+        this.orderDelivery()
+      } else {
+        this.orderCancel()
+      }
+    },
+    orderCancel () {
+      console.log('cancel')
+      this.$store.dispatch('orderCancel', {
+        id: this.getOrder.id,
+        time: new Date()
+      }).then(res => {}).catch(err => {})
+    },
+    orderDelivery () {
+      console.log('delivery')
+      this.$store.dispatch('orderDelivery', {
+        id: this.getOrder.id,
+        time: new Date()
+      }).then(res => {}).catch(err => {})
     }
-    /*clickToMap () {
-      this.$router.push({ name: 'orderByIdMap', params: { address: this.getOrder.clientInfo.addressString } })
-    }*/
   }
 }
 </script>

@@ -97,6 +97,8 @@ export default function () {
           { id: 2, name: 'Пицца Альфредо', count: 2, price: 560 },
         ]
       }
-    ]
+    ],
+    order: null,
+    server_time: null
   }
 }

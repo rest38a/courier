@@ -20,6 +20,12 @@ export default function (/* { ssrContext } */) {
     modules: {
       order, user
     },
+    state: {
+      baseUrl: 'https://domain.loc'
+    },
+    getters: {
+      getBaseUrl: state => state.baseUrl
+    },
 
     // enable strict mode (adds overhead!)
     // for dev mode only
