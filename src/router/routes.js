@@ -23,14 +23,6 @@ const routes = [
         meta: {
           requiresAuth: true
         }
-      },
-      {
-        path: '/order/:id/map',
-        name: 'orderByIdMap',
-        component: () => import('pages/Map'),
-        meta: {
-          requiresAuth: true
-        }
       }
     ]
   },
