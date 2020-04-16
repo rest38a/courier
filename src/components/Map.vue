@@ -1,6 +1,14 @@
 <template>
   <q-dialog v-model="dialog" :position="position" @hide="hideDialog">
-    <div id="map"></div>
+    <q-card>
+      <q-card-section>
+        <div id="info">
+          <div class="text-weight-bold">Адрес доставки</div>
+          <p>{{ toAddress }}</p>
+        </div>
+        <div id="map"></div>
+      </q-card-section>
+    </q-card>
   </q-dialog>
 </template>
 
@@ -25,8 +33,14 @@ export default {
     return {
       status: {},
       fromAddress: '',
-      myMap: null
+      myMap: null,
+      apiKey: '83aafa99-0b83-4e89-908a-dc88d325158d'
     }
+  },
+  mounted() {
+    const map = document.createElement('script');
+    map.setAttribute('src', `https://api-maps.yandex.ru/2.1/?&apikey=${this.apiKey}&lang=ru_RU`);
+    document.head.appendChild(map);
   },
   updated () {
     this.geoFind();
