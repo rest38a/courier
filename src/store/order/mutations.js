@@ -1,8 +1,8 @@
-export function setOrders ( state, data ) {
+export function setOrders (state, data) {
   state.orders = data.orders
-  state.server_time = data.server_time
+  state.server_time = data.serverTime
 }
 
-export function setOrder ( state, order ) {
+export function setOrder (state, order) {
   state.order = order
 }

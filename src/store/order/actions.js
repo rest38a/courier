@@ -1,10 +1,13 @@
+import axios from 'axios'
+
 /**
  * Получение списка активных заказов
  */
 export function fetchOrder ({ commit, getters }, user) {
   return new Promise((resolve, reject) => {
-    this.$axios.get(`${getters.getBaseUrl}/api/deliveryman/activeorders/${user}`)
+    axios.get(`${getters.getBaseUrl}/api/deliveryman/activeorders/${user}`)
       .then(res => {
+        console.log(res.data)
         commit('setOrders', res.data)
         resolve(res.data.orders)
       })
@@ -19,7 +22,7 @@ export function fetchOrder ({ commit, getters }, user) {
  */
 export function fetchOrderById ({ commit, getters }, id) {
   return new Promise((resolve, reject) => {
-    this.$axios.get(`${getters.getBaseUrl}/`)
+    axios.get(`${getters.getBaseUrl}/`)
       .then(res => {
         commit('setOrder', res.data)
         resolve(res.data)
@@ -35,7 +38,7 @@ export function fetchOrderById ({ commit, getters }, id) {
  */
 export function orderDelivery ({ getters }, order) {
   return new Promise((resolve, reject) => {
-    this.$axios.post(`${getters.getBaseUrl}/api/deliveryman/order/done`, order)
+    axios.post(`${getters.getBaseUrl}/api/deliveryman/order/done`, order)
       .then(res => {
         resolve(res.data.state)
       })
@@ -50,7 +53,7 @@ export function orderDelivery ({ getters }, order) {
  */
 export function orderCancel ({ getters }, order) {
   return new Promise((resolve, reject) => {
-    this.$axios.post(`${getters.getBaseUrl}/api/deliveryman/order/cancel`, order)
+    axios.post(`${getters.getBaseUrl}/api/deliveryman/order/cancel`, order)
       .then(res => {
         resolve(res.data.state)
       })

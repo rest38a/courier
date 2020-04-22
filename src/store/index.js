@@ -21,7 +21,7 @@ export default function (/* { ssrContext } */) {
       order, user
     },
     state: {
-      baseUrl: 'https://domain.loc'
+      baseUrl: 'https://beehappypizza.ru'
     },
     getters: {
       getBaseUrl: state => state.baseUrl

@@ -1,7 +1,7 @@
-export function getOrders ( state ) {
+export function getOrders (state) {
   return state.orders
 }
 
-export function getOrder ( state ) {
+export function getOrder (state) {
   return state.order
 }

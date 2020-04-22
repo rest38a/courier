@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 /**
  * Аутентификация пользователя
  */
@@ -32,13 +34,16 @@ export function logout ({ commit }) {
 /**
  * Отметка о нахождении на базе
  */
-export function orderCancel ({ getters }, user) {
+export function sendOnBase ({ getters }, id) {
+  //console.log('onBase')
   return new Promise((resolve, reject) => {
-    this.$axios.post(`${getters.getBaseUrl}/api/deliveryman/onbase/`, user.id)
+    axios.post(`${getters.getBaseUrl}/api/deliveryman/onbase/`, id)
       .then(res => {
+        console.log('успешно', res)
         resolve(res.data.state)
       })
       .catch(err => {
+        console.log('ошибка', err)
         reject(err)
       })
   })
